@@ -1,0 +1,112 @@
+/* เปลี่ยนสีพื้นหลังเว็บตามข้อ 3 และสร้างชุดสีของแบรนด์ */
+:root {
+  --primary-bg: #fdfaf6;          /* พื้นหลังครีมละมุน */
+  --card-bg: #ffffff;             /* ตัวการ์ดสีขาวสะอาดเพื่อให้เอฟเฟกต์ 3D ชัดเจน */
+  --accent-color: #ff7a00;        /* สีส้มสดใสแนวอาหารสัตว์ */
+  --gradient-dark: #2b1b10;
+  --shadow-3d: 0 15px 35px rgba(43, 27, 16, 0.12), 0 5px 15px rgba(0, 0, 0, 0.06);
+  --shadow-3d-hover: 0 25px 50px rgba(43, 27, 16, 0.22), 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--primary-bg);
+  font-family: 'Prompt', 'Segoe UI', sans-serif;
+  color: #4a3f35;
+  overflow-x: hidden;
+}
+
+/* แอนิเมชันเปิดหน้าเว็บแรกเริ่ม */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.app-container {
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* สไตล์หัวข้อร้านค้าระบบไล่เฉดสี */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-color), #ff4d00);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ปรับสีตัวการ์ดและการขึ้นรูปแบบ 3D ตามข้อ 4 */
+.food-card-3d {
+  background-color: var(--card-bg);
+  border-radius: 20px !important;
+  box-shadow: var(--shadow-3d);
+  transform: perspective(1000px) rotateX(2deg) rotateY(-1deg);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+/* เมื่อเลื่อนเมาส์ผ่านให้การ์ดลอย 3D เด้งสู้มือ */
+.food-card-3d:hover {
+  transform: perspective(1000px) translateY(-12px) rotateX(0deg) rotateY(0deg) scale(1.02);
+  box-shadow: var(--shadow-3d-hover);
+}
+
+.img-container {
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+}
+
+.food-card-3d img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.food-card-3d:hover img {
+  transform: scale(1.08);
+}
+
+/* ระบบป้ายริบบอนด้านบน */
+.card-badges {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.custom-badge {
+  padding: 8px 14px !important;
+  font-size: 0.85rem !important;
+  border-radius: 30px !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ปุ่มกดสไตล์ 3D เด้งนูน */
+.btn-order {
+  background: linear-gradient(135deg, #2b1b10, #1a100a);
+  color: #fff;
+  border: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-order:hover {
+  background: linear-gradient(135deg, var(--accent-color), #ff4d00);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 122, 0, 0.3);
+}
